@@ -97,12 +97,12 @@
 		2727B0982526432F000E85D2 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				2727B0992526432F000E85D2 /* AppDelegate.swift */,
-				2727B09D2526432F000E85D2 /* ViewController.swift */,
+				2727B0DE25264A00000E85D2 /* Model */,
+				2727B0DF25264A07000E85D2 /* View */,
+				2727B0E025264A0C000E85D2 /* Controller */,
+				2727B0E125264A12000E85D2 /* Supporting Files */,
 				2727B09F2526432F000E85D2 /* Main.storyboard */,
-				2727B0A225264331000E85D2 /* Assets.xcassets */,
 				2727B0A425264331000E85D2 /* LaunchScreen.storyboard */,
-				2727B0A725264331000E85D2 /* Info.plist */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -123,6 +123,38 @@
 				2727B0BD25264331000E85D2 /* Info.plist */,
 			);
 			path = QuizAppUITests;
+			sourceTree = "<group>";
+		};
+		2727B0DE25264A00000E85D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2727B0DF25264A07000E85D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2727B0E025264A0C000E85D2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2727B09D2526432F000E85D2 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2727B0E125264A12000E85D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2727B0992526432F000E85D2 /* AppDelegate.swift */,
+				2727B0A225264331000E85D2 /* Assets.xcassets */,
+				2727B0A725264331000E85D2 /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
