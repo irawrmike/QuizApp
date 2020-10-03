@@ -152,7 +152,7 @@ class QuestionViewController: UIViewController {
             let millisecs = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 1000)
             let secs = timeInterval % 60
             let mins = (timeInterval / 60) % 60
-            self.timerView.timerLabel.text = String(format: "%0.2d:%0.2d:%0.3d",mins,secs,millisecs)
+            self.timerView.timerLabel.text = String(format: "%02d:%02d:%0.3d", mins, secs, millisecs)
         })
     }
     
