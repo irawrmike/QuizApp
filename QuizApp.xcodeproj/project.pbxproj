@@ -181,7 +181,6 @@
 		2727B0DF25264A07000E85D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2749F8112528EF9300380291 /* Results */,
 				2727B13B25276408000E85D2 /* Question */,
 			);
 			path = Views;
@@ -214,13 +213,6 @@
 				2727B128252763D0000E85D2 /* TimerView.swift */,
 			);
 			path = Question;
-			sourceTree = "<group>";
-		};
-		2749F8112528EF9300380291 /* Results */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Results;
 			sourceTree = "<group>";
 		};
 		27CF1C94252797840022F9AB /* View */ = {
