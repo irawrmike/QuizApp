@@ -16,17 +16,24 @@ import Foundation
 class NetworkController {
     private let triviaAPIScheme = "https"
     private let triviaAPIDomain = "opentdb.com"
-    private let triviaAPIPath = "/api.php"
+    private let triviaAPIDefaultPath = "/api.php"
+    private let triviaAPICategoryPath = "/api_category.php"
+    private let triviaAPICountPath = "/api_count.php"
+    private let triviaAPITokenPath = "/api_token.php"
     private var triviaAPIURL: URL?
     
     private let defaultQuestionAmount = 10
     
-    
-    private func constructURL(amount: Int?, category: Int?, difficulty: Difficulty?, type: QuestionType?) -> URL? {
+    private func constructURLComponents() -> URLComponents {
         var components = URLComponents()
         components.scheme = triviaAPIScheme
         components.host = triviaAPIDomain
-        components.path = triviaAPIPath
+        return components
+    }
+    
+    private func constructURL(amount: Int?, category: Int?, difficulty: Difficulty?, type: QuestionType?) -> URL? {
+        var components = constructURLComponents()
+        components.path = triviaAPIDefaultPath
         
         var queryItems: [URLQueryItem] = []
         if let amount = amount, amount > 0 {
@@ -43,9 +50,44 @@ class NetworkController {
         if let type = type {
             queryItems.append(URLQueryItem(name: "type", value: type.rawValue))
         }
+        // Forcing API encoding method to URL Encoding RFC 3986
+        queryItems.append(URLQueryItem(name: "encode", value: "url3986"))
         components.queryItems = queryItems
         
         return components.url
+    }
+    
+    private func constructCategoryURL() -> URL? {
+        var components = constructURLComponents()
+        components.path = triviaAPICategoryPath
+        return components.url
+    }
+    
+    func getCategories(completion: @escaping (_ categories: [Category]?, _ error: NSError?) -> Void) {
+        if let url = constructCategoryURL() {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let error = error as NSError? {
+                    completion(nil, error)
+                }else{
+                    let response = response as! HTTPURLResponse
+                    switch response.statusCode {
+                    case (200...299):
+                        if let data = data {
+                            do {
+                                let dataResult = try JSONDecoder().decode(CategoryDataResult.self, from: data)
+                                completion(dataResult.results, nil)
+                            }catch{
+                                completion(nil, ResponseCode.JSONDecoderError as NSError?)
+                            }
+                        }
+                    default:
+                        completion(nil, ResponseCode.ServerError as NSError?)
+                    }
+                }
+            }.resume()
+        }else{
+            completion(nil, ResponseCode.InvalidCategoryURL as NSError?)
+        }
     }
     
     func getQuestions(amount: Int?, category: Int?, difficulty: Difficulty?, type: QuestionType?, completion: @escaping (_ questions: [Question]?, _ error: NSError?) -> Void) {
@@ -61,8 +103,9 @@ class NetworkController {
                             do {
                                 let dataResult = try JSONDecoder().decode(DataResult.self, from: data)
                                 completion(dataResult.results, nil)
-                            }catch{
-                                completion(nil, ResponseCode.JSONDecoderError as NSError?)
+                            }catch let error {
+                                print(error.localizedDescription)
+                                completion(nil, error as NSError?)
                             }
                         }
                     default:

@@ -21,4 +21,5 @@ enum ResponseCode: Int, Error, Codable {
     case InvalidURL = 5
     case JSONDecoderError = 6
     case ServerError = 7
+    case InvalidCategoryURL = 8
 }
