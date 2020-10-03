@@ -18,7 +18,7 @@ class TriviaNavigationController: UINavigationController {
         }
     }
     
-    private let questionCount: Int = 1
+    private let questionCount: Int = 10
     private var questions: [Question]?
     private var currentQuestionIndex: Int = 0
     private var answers: [Answer] = []
