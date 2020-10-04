@@ -10,6 +10,7 @@ import UIKit
 class CategoryViewController: UIViewController {
     private let networkController = NetworkController()
     
+    private let titleLabel = UILabel(frame: CGRect.zero)
     private let tableView = UITableView(frame: CGRect.zero)
     private let tableViewCellIdentifier = "CategoryTableViewCell"
     
@@ -29,13 +30,25 @@ class CategoryViewController: UIViewController {
     }
     
     private func setupViews() {
+        view.addSubview(titleLabel)
+        titleLabel.textAlignment = NSTextAlignment.left
+        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+        titleLabel.numberOfLines = 1
+        titleLabel.text = "Select a category to start"
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20.0).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20.0).isActive = true
+        
+        
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellIdentifier)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20.0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -80,7 +93,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier, for: indexPath) as UITableViewCell
         if let category = categories?[indexPath.row] {
             cell.textLabel?.text = category.name
-            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
             cell.textLabel?.numberOfLines = 0
         }
         return cell
