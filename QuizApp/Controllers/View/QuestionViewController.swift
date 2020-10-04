@@ -14,6 +14,7 @@ class QuestionViewController: UIViewController {
     private let timerView = TimerView(frame: CGRect.zero)
     private let questionView = QuestionView(frame: CGRect.zero)
     private let answerStackView = UIStackView(frame: CGRect.zero)
+    private var answerViews: [AnswerView] = []
     
     var currentQuestionIndex: Int = 0
     var totalQuestionCount: Int = 0
@@ -122,6 +123,7 @@ class QuestionViewController: UIViewController {
                 answerView.answerButton.addTarget(self, action: #selector(answerButtonTapped(sender:)), for: .touchUpInside)
                 answerView.answerLabel.text = currentAnswers[i]
                 answerStackView.addArrangedSubview(answerView)
+                answerViews.append(answerView)
             }
         }
     }
@@ -166,8 +168,41 @@ extension QuestionViewController {
         guard let timer = timer else { return }
         timer.invalidate()
         currentTime = Date()
-        guard let navigationController = navigationController as? TriviaNavigationController else { return }
         let elapsedTime = currentTime.timeIntervalSince(startTime)
-        navigationController.answerSelected(currentAnswers[sender.tag], time: elapsedTime)
+        
+        disableButtons()
+        animateCorrectAnswer { [weak self] in
+            guard let navigationController = self?.navigationController as? TriviaNavigationController else { return }
+            guard let currentAnswer = self?.currentAnswers[sender.tag] else { return }
+            navigationController.answerSelected(currentAnswer, time: elapsedTime)
+        }
+    }
+    
+    private func disableButtons() {
+        for answerView in answerViews {
+            answerView.answerButton.isEnabled = false
+        }
+    }
+}
+
+// MARK: Animations
+
+extension QuestionViewController {
+    private func animateCorrectAnswer(_ completion: @escaping () -> Void) {
+        guard let correctIndex = correctAnswerIndex else { return }
+        for i in 0..<self.answerViews.count {
+            if i == correctIndex {
+                UIView.transition(with: self.answerViews[i].answerLabel, duration: 1.0, options: .transitionCrossDissolve, animations: {
+                    self.answerViews[i].answerLabel.textColor = UIColor.green
+                }, completion: { (_) in
+                    completion()
+                })
+            }else{
+                UIView.transition(with: self.answerViews[i].answerLabel, duration: 1.0, options: .transitionCrossDissolve, animations: {
+                    self.answerViews[i].answerLabel.textColor = UIColor.red
+                }, completion: nil)
+            }
+        }
+
     }
 }
