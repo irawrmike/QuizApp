@@ -30,6 +30,7 @@ class QuestionView: UIView {
         addSubview(questionLabel)
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = NSTextAlignment.center
+        questionLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.topAnchor.constraint(equalTo: questionBackgroundView.topAnchor, constant: 10.0).isActive = true

@@ -57,6 +57,7 @@ class QuestionViewController: UIViewController {
     private func setupViews() {
         view.addSubview(difficultyLabel)
         difficultyLabel.textAlignment = NSTextAlignment.center
+        difficultyLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         
         difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
         difficultyLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0).isActive = true
@@ -74,6 +75,7 @@ class QuestionViewController: UIViewController {
         
         view.addSubview(questionIndexLabel)
         questionIndexLabel.textAlignment = NSTextAlignment.center
+        questionIndexLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         
         questionIndexLabel.translatesAutoresizingMaskIntoConstraints = false
         questionIndexLabel.topAnchor.constraint(equalTo: timerView.bottomAnchor, constant: 40.0).isActive = true

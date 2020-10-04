@@ -31,6 +31,7 @@ class AnswerView: UIView {
         addSubview(answerLabel)
         answerLabel.numberOfLines = 0
         answerLabel.textAlignment = NSTextAlignment.center
+        answerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
         answerLabel.topAnchor.constraint(equalTo: answerBackgroundView.topAnchor, constant: 10.0).isActive = true

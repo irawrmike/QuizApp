@@ -46,6 +46,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(questionLabel)
         questionLabel.textAlignment = NSTextAlignment.center
+        questionLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         questionLabel.numberOfLines = 0
         
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -56,6 +57,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(submittedAnswerLabel)
         submittedAnswerLabel.textAlignment = NSTextAlignment.center
+        submittedAnswerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         submittedAnswerLabel.numberOfLines = 0
         
         submittedAnswerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +68,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(correctAnswerLabel)
         correctAnswerLabel.textAlignment = NSTextAlignment.center
+        correctAnswerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         correctAnswerLabel.numberOfLines = 0
         
         correctAnswerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +79,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(answerPointsLabel)
         answerPointsLabel.textAlignment = NSTextAlignment.center
+        answerPointsLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         answerPointsLabel.numberOfLines = 1
         
         answerPointsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +90,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(timeLabel)
         timeLabel.textAlignment = NSTextAlignment.center
+        timeLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         timeLabel.numberOfLines = 0
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -96,6 +101,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(timePointsLabel)
         timePointsLabel.textAlignment = NSTextAlignment.center
+        timePointsLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         timePointsLabel.numberOfLines = 1
         
         timePointsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +112,7 @@ class ResultDetailsViewController: UIViewController {
         
         scrollView.addSubview(totalPointsLabel)
         totalPointsLabel.textAlignment = NSTextAlignment.center
+        totalPointsLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         totalPointsLabel.numberOfLines = 0
         
         totalPointsLabel.translatesAutoresizingMaskIntoConstraints = false

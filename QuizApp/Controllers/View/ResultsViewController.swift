@@ -35,6 +35,7 @@ class ResultsViewController: UIViewController {
     private func setupViews() {
         view.addSubview(totalScoreLabel)
         totalScoreLabel.textAlignment = NSTextAlignment.center
+        totalScoreLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
         
         totalScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         totalScoreLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0).isActive = true
@@ -55,6 +56,8 @@ class ResultsViewController: UIViewController {
         view.addSubview(restartButton)
         restartButton.setTitle("Restart", for: .normal)
         restartButton.addTarget(self, action: #selector(restartButtonTapped(sender:)), for: .touchUpInside)
+        restartButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+        restartButton.setTitleColor(UIColor.gray, for: .normal)
         
         restartButton.translatesAutoresizingMaskIntoConstraints = false
         restartButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 10.0).isActive = true
@@ -92,6 +95,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) ?? UITableViewCell(style: UITableViewCell.CellStyle.value2, reuseIdentifier: cellIdentifier)
+        
         if results[indexPath.row].correct {
             cell.textLabel?.text = "Correct"
             cell.textLabel?.textColor = UIColor.green
@@ -99,8 +103,13 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "Incorrect"
             cell.textLabel?.textColor = UIColor.red
         }
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+        
         cell.detailTextLabel?.text = "\(results[indexPath.row].pointsEarned) points earned"
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        
         cell.accessoryType = UITableViewCell.AccessoryType.detailButton
+        cell.tintColor = UIColor.gray
         cell.selectionStyle = .none
         return cell
     }

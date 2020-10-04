@@ -17,6 +17,7 @@ class TimerView: UIView {
         
         addSubview(timerLabel)
         timerLabel.textAlignment = NSTextAlignment.center
+        timerLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
         timerLabel.numberOfLines = 1
         timerLabel.text = "0:00:000"
         

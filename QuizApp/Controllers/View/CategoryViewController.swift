@@ -80,8 +80,14 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier, for: indexPath) as UITableViewCell
         if let category = categories?[indexPath.row] {
             cell.textLabel?.text = category.name
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+            cell.textLabel?.numberOfLines = 0
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
